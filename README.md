@@ -18,12 +18,20 @@ Most "make AI more honest" prompts are a single rule: "don't be sycophantic." Th
 
 ## How to use it
 
-Paste [`instruction-set.md`](./instruction-set.md) into:
-- Claude.ai → Settings → Profile → custom instructions
-- Claude Code → a `CLAUDE.md` or system-level config
-- Any other LLM product with a persistent system-prompt field
+Each harness has its own file with exact setup steps and a ready-to-paste version of the instruction set adapted for that environment.
 
-It's written for Claude specifically (references Skills, Projects, MCP) but the underlying structure — precedence rules, scoped pushback, a consequential-decision threshold — ports to any model.
+| Harness | File | Persistence | Key limitation |
+|---|---|---|---|
+| Claude.ai | [`instruction-set.md`](./instruction-set.md) | Per-account (Custom Instructions) | ~1500 char limit — the full set fits |
+| Claude Code | [`harnesses/claude-code.md`](./harnesses/claude-code.md) | Per-project (`CLAUDE.md`) or global (`~/.claude/CLAUDE.md`) | None |
+| ChatGPT | [`harnesses/chatgpt.md`](./harnesses/chatgpt.md) | Per-GPT (Custom GPT) or per-account (Custom Instructions) | Custom Instructions: ~1500 chars per field — use Custom GPT for the full set |
+| Gemini | [`harnesses/gemini.md`](./harnesses/gemini.md) | Per-Gem — must open the Gem to activate | Standard Gemini conversations don't include Gem instructions |
+| Cursor | [`harnesses/cursor.md`](./harnesses/cursor.md) | Per-project (`.cursor/rules/*.mdc`) or global (User Rules) | None |
+| GitHub Copilot | [`harnesses/github-copilot.md`](./harnesses/github-copilot.md) | Per-repo (`.github/copilot-instructions.md`) or account | Affects Copilot Chat only — not inline completions |
+| Windsurf | [`harnesses/windsurf.md`](./harnesses/windsurf.md) | Per-project (`.windsurfrules`) or global (Custom Instructions) | None |
+| Perplexity | [`harnesses/perplexity.md`](./harnesses/perplexity.md) | Session-only — prepend manually each conversation | No cross-session persistence |
+
+The behavioral rules (pushback, conceding, sycophancy, directness, creative mode, emotional context, preserving judgment) are identical across every harness. The only thing that changes is the `On Repetitive Work` section, which names capture mechanisms that actually exist in that environment.
 
 ## Philosophy
 
